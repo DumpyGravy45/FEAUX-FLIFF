@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NAIA Playoff Sportsbook – First Round</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1a1a1a;--mute:#666;--line:#e2ddd2;--acc:#0b6b3a;--accbg:#e4f3ea;--bi:#fff;--bad:#b4232c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121512;--card:#1b201b;--ink:#eee;--mute:#9aa39a;--line:#2d352d;--acc:#4fd18b;--accbg:#173323;--bi:#06210f;--bad:#ff7a80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121512;--card:#1b201b;--ink:#eee;--mute:#9aa39a;--line:#2d352d;--acc:#4fd18b;--accbg:#173323;--bi:#06210f;--bad:#ff7a80;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1100px;margin:auto}
+h1{margin:0;font-size:24px}
+.sub{color:var(--mute);font-size:13px;margin-top:4px}
+.warn{margin:12px 0 0;padding:10px 12px;border:1px solid var(--line);background:var(--card);border-radius:10px;font-size:13px}
+main{max-width:1100px;margin:auto;padding:8px 16px 40px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.games{flex:1 1 560px;min-width:0;display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto}
+.meta{font-size:12px;color:var(--mute);margin-bottom:8px}
+table{width:100%;border-collapse:collapse;min-width:420px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);text-align:center;font-weight:600;padding:2px 4px}
+th:first-child,td:first-child{text-align:left}
+td{padding:4px}
+.tm{font-weight:600}.rec{font-weight:400;color:var(--mute);font-size:12px}
+.odd{width:100%;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:7px 4px;cursor:pointer;font:inherit;line-height:1.2}
+.odd small{display:block;color:var(--mute);font-size:11px}
+.odd:hover{border-color:var(--acc)}
+.odd.on{background:var(--accbg);border-color:var(--acc)}
+.tune{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--mute);align-items:center}
+.tune input{width:70px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+.why{font-size:12px;color:var(--mute);margin-top:8px}
+aside{flex:0 1 310px;min-width:270px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+aside h2{font-size:16px;margin:0 0 8px}
+.bank{display:flex;justify-content:space-between;font-weight:600;margin-bottom:4px}
+.risk{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:10px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:8px}
+.seg button{flex:1;padding:7px 2px;font-size:12px;border:none;background:transparent;color:var(--ink);cursor:pointer;font:inherit;font-weight:600}
+.seg button.on{background:var(--acc);color:var(--bi)}
+.leg{border-top:1px solid var(--line);padding:8px 0;font-size:13px}
+.leg .row{display:flex;gap:6px;align-items:center;justify-content:space-between}
+.leg input{width:76px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+.x{background:none;border:none;color:var(--mute);cursor:pointer;font-size:16px}
+.btn{width:100%;margin-top:10px;padding:10px;border:none;border-radius:8px;background:var(--acc);color:var(--bi);cursor:pointer;font:inherit;font-weight:700}
+.btn:disabled{opacity:.4;cursor:default}
+.empty,.hint{color:var(--mute);font-size:12px;margin:6px 0}
+.sm{padding:3px 8px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;font:inherit;font-size:12px}
+.sm:hover{border-color:var(--acc)}
+.win{color:var(--acc)}.loss{color:var(--bad)}
+.method{max-width:1100px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--mute)}
+.method h2{font-size:15px;color:var(--ink)}
+.props summary{cursor:pointer;font-weight:600;margin-top:12px;font-size:13px}.props table{margin-top:6px;min-width:520px}.props td{font-size:13px}
+</style></head>
+<body>
+<header>
+<h1>NAIA Playoff Sportsbook</h1>
+<div class="sub">Football Championship Series · First Round · Saturday, Nov. 21, 2026</div>
+<div class="warn"><b>Play money only.</b> Spreads and totals are derived from the Massey Ratings you supplied (Pwr, Off, Def and home-field values). Moneylines use Massey’s own win probabilities where it listed the game. Edit any spread or total and the moneylines reprice.</div>
+</header>
+<main>
+<section class="games" id="games"></section>
+<aside class="card">
+<h2>Bet slip</h2>
+<div class="bank"><span>Bankroll</span><span id="bank"></span></div>
+<div class="risk"><span>At risk (open bets)</span><span id="risk"></span></div>
+<div id="slip"></div>
+<button class="btn" id="place" disabled>Place bets</button>
+<div id="placed" style="margin-top:14px"></div>
+</aside>
+</main>
+<section class="method">
+<h2>How the lines are priced</h2>
+<p>Spread = home Pwr − away Pwr + the home team’s Massey home-field value (about 2.2 points). Each team’s expected score = its Off rating minus the opponent’s Def rating, plus half the home-field value to the host; the total is the sum. Moneylines use Massey’s win probabilities (51%, 96%, 59%) plus 2.5% per side as the book’s margin, capped so heavy favorites don’t go past about −3200. If you edit a spread, the moneyline reprices from a normal curve with a 17-point standard deviation, which matches Massey’s numbers on the close games. Spreads and totals are −110 both sides.</p>
+<p>A parlay multiplies the posted odds of each leg, one leg per game. A same-game parlay (SGP) combines legs from one game: a spread or moneyline, a total, and any player props. These legs are correlated, so the price comes from a joint probability model instead of simple multiplication: the margin and the total share a small positive correlation when the favorite is involved (a favorite covering tends to come with a higher score), which makes favorite-and-over pay less than independent legs and favorite-and-under pay more. Spread and moneyline can’t be combined in one game because one implies the other. An SGPx combines two or more SGPs from different games (games are treated as independent), with extra single legs allowed. SGPs carry a 9% margin. One lost leg loses the whole bet. Use Won or Lost on an open bet to settle it and update the bankroll.</p>
+<p>Ottawa player props use each player’s per-game average from the Ottawa stat sheet (games played, not team games), with no opponent or game-script adjustment. Yardage, reception and tackle lines are the average rounded to the nearest half point at −110. Touchdown, field goal, interception and sack props use a Poisson count model with the player’s average as the expected count and a 2.5% margin per side. Luke Edwards, Malakai Hudson and Jayden Johnson each missed two of Ottawa’s 11 games, and the sheet doesn’t say why, so their averages could be affected by injuries or role changes. Hudson and Jayden Johnson tie for most touchdowns (11), and Cade Monroe and Ethan Yinger tie for most tackles (78).</p>
+<p>Same-game props are priced with a correlated model. Ottawa’s scoring is tied negatively to Baker’s margin and positively to the total, and each Ottawa offensive prop is tied to Ottawa’s scoring, so yardage and touchdown overs pair strongly with the Ottawa spread, moneyline and the over. Props for the same player are tied tightly, and Edwards’s passing props are tied to Johnson’s receiving props. Interceptions and sacks move with Ottawa playing well, and tackles move the other way. The joint probability comes from an 80,000-draw simulation with a fixed seed, so the same slip always gets the same price. Each SGP carries the same compounding margin as −110 legs (about 9% for two legs, 13% for three, 17% for four).</p>
+<p>Friends player props follow the same rules from the Friends stat sheet: the top player in each category except punting, kickoffs and returns, and the top nine rushers by yards per game. Devin Moreland’s 29.0 yards per game comes from a single game and two carries, so I used Elias Pino (28.6 over 7 games) as the ninth rusher instead. E’derian Sykes’s rushing touchdown prop is set at 1.5 because he averages 1.64 per game, and Connor Tillman’s field goal prop is 0.5 because he has only 3 field goals all season.</p>
+<p>Source: Massey Ratings table supplied by the user; matchups from the NAIA field announcement. Kickoff times were not yet confirmed.</p>
+</section>
+<script>
+var SD=17, VIG=0.025;
+var games=[
+{id:1,away:"Northwestern (Iowa)",ar:"8-3",home:"Friends (Kan.)",hr:"10-1",site:"Wichita, Kan. · #18 at #13",spread:-0.5,total:75,p:0.51,why:"Massey Pwr: Northwestern 1.61, Friends −0.23. Friends’ schedule-strength rating is far lower, so Massey calls this a coin flip."},
+{id:2,away:"Ottawa (Kan.)",ar:"8-3",home:"Baker (Kan.)",hr:"9-1",site:"Baldwin City, Kan. · #19 at #14",spread:-21,total:54,p:0.96,mlA:850,why:"Massey Pwr: Baker −1.78, Ottawa −20.46, the widest gap on the slate. Massey gives Baker 96%."},
+{id:3,away:"Reinhardt (Ga.)",ar:"7-4",home:"Louisiana Christian",hr:"10-1",site:"Pineville, La. · #20 at #15",spread:-4,total:72.5,p:0.59,why:"Massey Pwr: LCU −7.77, Reinhardt −9.36. Both rate as strong offenses with soft defenses, hence the high total."},
+{id:4,away:"Midland (Neb.)",ar:"9-2",home:"Eastern Oregon",hr:"8-2",site:"La Grande, Ore. · #16 at #17",spread:4,total:59.5,p:0.41,why:"Massey Pwr: Midland −0.56, Eastern Oregon −6.75. This game wasn’t in the Massey schedule columns supplied, so the 41% is my own calculation from the ratings."}
+];
+function pcdf(l,k){var s=0,t=Math.exp(-l);for(var i=0;i<=k;i++){s+=t;t*=l/(i+1)}return s}
+function buildOttawaProps(){
+function hl(x){return Math.round(x-0.5)+0.5}
+function ou(player,stat,tot,gp){var a=tot/gp;return{player:player,stat:stat,avg:a,line:hl(a),po:-110,pu:-110,pov:0.5}}
+function poi(player,stat,tot,gp,line){var lam=tot/gp,P=1-pcdf(lam,Math.floor(line));return{player:player,stat:stat,avg:lam,line:line,po:am(P+VIG),pu:am(1-P+VIG),pov:P}}
+return[
+ou("Luke Edwards","Passing yds",2170,9),
+poi("Luke Edwards","Passing TDs",21,9,1.5),
+ou("Malakai Hudson","Rushing yds",629,9),
+poi("Malakai Hudson","Rushing TDs",11,9,0.5),
+ou("Jayden Johnson","Receiving yds",1112,9),
+ou("Jayden Johnson","Receptions",79,9),
+poi("Jayden Johnson","Receiving TDs",11,9,0.5),
+poi("Ike Prengel","FG made",7,11,1.5),
+ou("De’Anthony Curtis","All-purpose yds",1250,11),
+poi("Ethan Yinger","Interceptions",3,11,0.5),
+ou("Cade Monroe","Tackles",78,11),
+poi("Gabe Watson","Sacks",4.5,11,1.5)]}
+function buildFriendsProps(){
+function hl(x){return Math.round(x-0.5)+0.5}
+function ou(player,stat,tot,gp){var a=tot/gp;return{player:player,stat:stat,avg:a,line:hl(a),po:-110,pu:-110,pov:0.5}}
+function poi(player,stat,tot,gp,line){var lam=tot/gp,P=1-pcdf(lam,Math.floor(line));return{player:player,stat:stat,avg:lam,line:line,po:am(P+VIG),pu:am(1-P+VIG),pov:P}}
+return[
+ou("Walker Overman","Passing yds",439,9),
+poi("Walker Overman","Passing TDs",8,9,0.5),
+ou("E’derian Sykes","Rushing yds",809,11),
+ou("Joey Millspaugh","Rushing yds",712,10),
+ou("Elon Conley","Rushing yds",601,10),
+ou("Michael Lopez","Rushing yds",617,11),
+ou("Walker Overman","Rushing yds",492,9),
+ou("Nick Cordova","Rushing yds",563,11),
+ou("DJ Dingle","Rushing yds",298,7),
+ou("Evan Cantu","Rushing yds",355,9),
+ou("Elias Pino","Rushing yds",200,7),
+poi("E’derian Sykes","Rushing TDs",18,11,1.5),
+ou("DJ Pearson","Receiving yds",240,7),
+poi("DJ Pearson","Receptions",7,7,0.5),
+poi("DJ Pearson","Receiving TDs",4,7,0.5),
+poi("Connor Tillman","FG made",3,11,0.5),
+poi("Zamarion Manuel","Interceptions",4,11,0.5),
+ou("Tyson Wallace","Tackles",74,11),
+poi("Cale Milleson","Sacks",6,11,0.5)]}
+var openProps={};
+function pbtn(g,i,d,line,odds){var key=g.id+"|pr|"+i+":"+d;var on=slip.some(function(s){return s.key===key});return '<button class="odd'+(on?' on':'')+'" data-k="'+key+'"><b>'+line+'</b><small>'+fa(odds)+'</small></button>'}
+function propsHtml(g){if(!g.props)return "";
+var rows=g.props.map(function(p,i){return '<tr><td class="tm">'+p.player+' <span class="rec">'+p.stat+'</span></td><td>'+p.avg.toFixed(1)+'</td><td>'+pbtn(g,i,"o","O "+p.line,p.po)+'</td><td>'+pbtn(g,i,"u","U "+p.line,p.pu)+'</td></tr>'}).join("");
+return '<details class="props" data-gid="'+g.id+'"'+(openProps[g.id]?' open':'')+'><summary>Player props · '+g.propName+'</summary><table><tr><th></th><th>Avg/g</th><th>Over</th><th>Under</th></tr>'+rows+'</table><div class="why">From the team stat sheet. Lines are set directly from each player’s season per-game average with no opponent adjustment. Yardage and tackle props are −110; count props are priced from a Poisson model. Props can be added to straight bets, parlays, SGPs and SGPx.</div></details>'}
+games[1].props=buildOttawaProps();games[1].propTeam="a";games[1].propName="Ottawa (Kan.)";
+games[0].props=buildFriendsProps();games[0].propTeam="h";games[0].propName="Friends (Kan.)";
+var bank=1000, slip=[], placed=[], mode="straight", pstake=10, nid=1;
+var SGP_HOLD=0.09, RHO=0.12;
+function erf(x){var s=x<0?-1:1;x=Math.abs(x);var t=1/(1+0.3275911*x);var y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y}
+function cdf(z){return 0.5*(1+erf(z/Math.SQRT2))}
+function icdf(p){var lo=-8,hi=8;for(var i=0;i<60;i++){var m=(lo+hi)/2;if(cdf(m)<p)lo=m;else hi=m}return (lo+hi)/2}
+function am(q){q=Math.min(Math.max(q,0.02),0.98);return q>=0.5?-Math.round(100*q/(1-q)):Math.round(100*(1-q)/q)}
+function fa(n){return n>0?"+"+n:""+n}
+function fs(n){return n>0?"+"+n:n===0?"PK":"−"+Math.abs(n)}
+function dec(a){return a>0?1+a/100:1+100/Math.abs(a)}
+function amer(d){return d>=2?Math.round((d-1)*100):-Math.round(100/(d-1))}
+function money(n){return "$"+n.toFixed(2)}
+function price(g){var pH=(g.p!=null)?g.p:cdf(-g.spread/SD),pA=1-pH;var qH=pH+VIG,qA=pA+VIG;if(qH>0.97){qH=0.97;qA=1.05-qH}else if(qA>0.97){qA=0.97;qH=1.05-qA}return{pH:pH,pA:pA,mlH:am(qH),mlA:(g.mlA!=null?g.mlA:am(qA))}}
+function btn(g,m,side,line,odds,fair){var key=g.id+"|"+m+"|"+side;var on=slip.some(function(s){return s.key===key});
+return '<button class="odd'+(on?' on':'')+'" data-k="'+key+'"><b>'+line+'</b><small>'+fa(odds)+(fair!=null?' · '+Math.round(fair*100)+'%':'')+'</small></button>'}
+function render(){
+var h="";games.forEach(function(g){var p=price(g);
+h+='<div class="card"><div class="meta">'+g.site+'</div><table><tr><th></th><th>Spread</th><th>Money</th><th>Total</th></tr>'+
+'<tr><td class="tm">'+g.away+' <span class="rec">'+g.ar+'</span></td><td>'+btn(g,"sp","a",fs(-g.spread),-110)+'</td><td>'+btn(g,"ml","a",fa(p.mlA),p.mlA,p.pA)+'</td><td>'+btn(g,"to","o","O "+g.total,-110)+'</td></tr>'+
+'<tr><td class="tm">'+g.home+' <span class="rec">'+g.hr+'</span></td><td>'+btn(g,"sp","h",fs(g.spread),-110)+'</td><td>'+btn(g,"ml","h",fa(p.mlH),p.mlH,p.pH)+'</td><td>'+btn(g,"to","u","U "+g.total,-110)+'</td></tr></table>'+
+'<div class="tune"><label>Home spread <input type="number" step="0.5" value="'+g.spread+'" data-g="'+g.id+'" data-f="spread"></label><label>Total <input type="number" step="0.5" value="'+g.total+'" data-g="'+g.id+'" data-f="total"></label></div>'+
+'<div class="why">'+g.why+'</div>'+propsHtml(g)+'</div>'});
+document.getElementById("games").innerHTML=h;
+renderSlip()}
+function label(g,m,side){if(m==="pr"){var pp=g.props[parseInt(side)];return pp.player+" "+(side.slice(-1)==="o"?"Over ":"Under ")+pp.line+" "+pp.stat}
+if(m==="sp")return side==="a"?g.away+" "+fs(-g.spread):g.home+" "+fs(g.spread);
+if(m==="ml")return (side==="a"?g.away:g.home)+" moneyline";
+return (side==="o"?"Over ":"Under ")+g.total}
+function oddsFor(g,m,side){if(m==="pr"){var pp=g.props[parseInt(side)];return side.slice(-1)==="o"?pp.po:pp.pu}if(m!=="ml")return -110;var p=price(g);return side==="a"?p.mlA:p.mlH}
+function isMargin(m){return m==="sp"||m==="ml"}
+function ord(m){return m==="pr"?2:isMargin(m)?0:1}
+function pidx(s){return s.m==="pr"?parseInt(s.side):0}
+function normalize(){var out=[],g={};
+slip.forEach(function(s){var gr=g[s.gid]||(g[s.gid]={n:0});
+if(mode==="straight"){out.push(s);return}
+if(mode==="parlay"){if(gr.n)return;gr.n=1;out.push(s);return}
+var k=s.m==="pr"?"pr"+pidx(s):isMargin(s.m)?"margin":"total";if(gr[k])return;gr[k]=1;out.push(s)});
+slip=out;
+if(mode==="sgp"&&slip.length){var f=slip[0].gid;slip=slip.filter(function(s){return s.gid===f})}
+if(mode!=="straight")slip.sort(function(a,b){return a.gid-b.gid||ord(a.m)-ord(b.m)||pidx(a)-pidx(b)})}
+function toggleLeg(key){var k=key.split("|"),gid=+k[0],m=k[1],side=k[2];
+var i=slip.findIndex(function(s){return s.key===key});
+if(i>=0){slip.splice(i,1);return}
+if(mode==="parlay")slip=slip.filter(function(s){return s.gid!==gid});
+else if(mode==="sgp"||mode==="sgpx"){
+if(mode==="sgp")slip=slip.filter(function(s){return s.gid===gid});
+slip=slip.filter(function(s){if(s.gid!==gid)return true;if(m==="pr")return !(s.m==="pr"&&parseInt(s.side)===parseInt(side));return ord(s.m)!==ord(m)})}
+slip.push({key:key,gid:gid,m:m,side:side,stake:10});normalize()}
+function groups(){var g={},order=[];slip.forEach(function(s){if(!g[s.gid]){g[s.gid]=[];order.push(s.gid)}g[s.gid].push(s)});return order.map(function(id){return{gid:id,legs:g[id]}})}
+function sgpInfo2(gr){if(gr.legs.length!==2)return null;
+var g=games[gr.gid-1],a=gr.legs.filter(function(s){return isMargin(s.m)})[0],b=gr.legs.filter(function(s){return s.m==="to"})[0];
+if(!a||!b)return null;
+var pr=price(g),lo=-9,hi=9;
+if(a.m==="sp"){if(a.side==="h")lo=0;else hi=0}
+else{var t=-icdf(pr.pH);if(a.side==="h")lo=t;else hi=t}
+var rho=(g.spread>0?-1:1)*RHO,sd=Math.sqrt(1-rho*rho),over=b.side==="o";
+var n=500,a0=Math.max(lo,-8),b0=Math.min(hi,8),h=(b0-a0)/n,p=0;
+for(var i=0;i<n;i++){var z=a0+(i+0.5)*h,pw=cdf(rho*z/sd);p+=Math.exp(-z*z/2)/Math.sqrt(2*Math.PI)*(over?pw:1-pw)*h}
+var d=Math.max(1.01,(1-SGP_HOLD)/p);
+var ind=dec(oddsFor(g,a.m,a.side))*dec(oddsFor(g,b.m,b.side));
+return{p:p,d:d,ind:ind}}
+var BETA={"Passing yds":0.5,"Passing TDs":0.55,"Rushing yds":0.4,"Rushing TDs":0.5,"Receiving yds":0.45,"Receptions":0.35,"Receiving TDs":0.5,"FG made":0.2,"All-purpose yds":0.5,"Interceptions":0.3,"Tackles":-0.2,"Sacks":0.25};
+function gameCorr(g){var sM=17,sT=16,rho=(g.spread>0?-1:1)*RHO,cov=rho*sM*sT,sg=g.propTeam==="h"?1:-1;
+var sdO=Math.sqrt((sT*sT+sM*sM+2*sg*cov)/4),covOM=(cov+sg*sM*sM)/2,covOT=(sT*sT+sg*cov)/2;
+return{rho:rho,cz:covOM/(sdO*sM),cw:covOT/(sdO*sT)}}
+function pcorr(a,b){var sa=a.stat,sb=b.stat,rec={"Receiving yds":1,"Receptions":1};
+function fam(s){return s.indexOf("Pass")===0?"p":s.indexOf("Rush")===0?"r":s.indexOf("Rec")===0?"c":"o"}
+var x=fam(sa),y=fam(sb);
+if(a.player===b.player){if(x!==y)return 0.25;return(rec[sa]&&rec[sb])?0.85:0.7}
+if((x==="p"&&y==="c")||(x==="c"&&y==="p")){var q=x==="p"?sa:sb,w=x==="p"?sb:sa;if(q==="Passing yds")return 0.6;if(q==="Passing TDs"&&w==="Receiving TDs")return 0.5;return 0.4}
+return (BETA[sa]||0.3)*(BETA[sb]||0.3)}
+function chol(R){var n=R.length,L=[];for(var i=0;i<n;i++){L.push([]);for(var j=0;j<=i;j++){var s=R[i][j];for(var k=0;k<j;k++)s-=L[i][k]*L[j][k];if(i===j){if(s<=1e-9)return null;L[i].push(Math.sqrt(s))}else L[i].push(s/L[j][j])}}return L}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var mcCache={};
+function mcInfo(gr){
+var g=games[gr.gid-1],legs=gr.legs,key=gr.gid+"|"+g.spread+"|"+g.total+"|"+g.p+"|"+legs.map(function(s){return s.key}).join(",");
+if(mcCache[key])return mcCache[key];
+var pr=price(g),vars=[],ev=[],vi={};
+function addVar(id,d){if(vi[id]===undefined){vi[id]=vars.length;vars.push(d)}return vi[id]}
+legs.forEach(function(s){
+if(isMargin(s.m)){ev.push({v:addVar("z",{t:"z"}),t:s.m==="sp"?0:-icdf(pr.pH),gt:s.side==="h"})}
+else if(s.m==="to"){ev.push({v:addVar("w",{t:"w"}),t:0,gt:s.side==="o"})}
+else{var p=g.props[parseInt(s.side)];ev.push({v:addVar("p"+parseInt(s.side),{t:"p",p:p}),t:icdf(1-p.pov),gt:s.side.slice(-1)==="o"})}});
+var cc=gameCorr(g),m=vars.length;
+function cv(a,b){if(a.t==="z"&&b.t==="w"||a.t==="w"&&b.t==="z")return cc.rho;
+if(a.t==="p"&&b.t==="p")return pcorr(a.p,b.p);
+var pv=a.t==="p"?a:b,o=a.t==="p"?b:a;return(BETA[pv.p.stat]||0.3)*(o.t==="z"?cc.cz:cc.cw)}
+var R=[],i,j;for(i=0;i<m;i++){R[i]=[];for(j=0;j<m;j++)R[i][j]=i===j?1:cv(vars[i],vars[j])}
+var L=chol(R),f=1;
+while(!L&&f>0.05){f*=0.85;var R2=R.map(function(r,a){return r.map(function(x,b){return a===b?1:x*f})});L=chol(R2)}
+var N=80000,rand=rng(20261121),hits=0,eps=[],z=[];
+for(var it=0;it<N;it++){
+for(var k=0;k<m;k+=2){var u1=rand()||1e-12,u2=rand(),r=Math.sqrt(-2*Math.log(u1));eps[k]=r*Math.cos(2*Math.PI*u2);if(k+1<m)eps[k+1]=r*Math.sin(2*Math.PI*u2)}
+for(i=0;i<m;i++){var s=0;for(j=0;j<=i;j++)s+=L[i][j]*eps[j];z[i]=s}
+var ok=true;for(i=0;i<ev.length;i++){var e=ev[i],val=z[e.v];if(e.gt?val<=e.t:val>=e.t){ok=false;break}}
+if(ok)hits++}
+var p2=Math.max(hits/N,0.5/N),hold=1-Math.pow(0.9545,legs.length),d=Math.min(500,Math.max(1.01,(1-hold)/p2));
+var ind=legs.reduce(function(a,s){return a*dec(oddsFor(g,s.m,s.side))},1);
+return mcCache[key]={p:p2,d:d,ind:ind}}
+function sgpInfo(gr){if(gr.legs.length<2)return null;
+var hasPr=gr.legs.some(function(s){return s.m==="pr"});
+if(!hasPr&&gr.legs.length===2)return sgpInfo2(gr);
+return mcInfo(gr)}
+function groupDec(gr){if(gr.legs.length===1){var s=gr.legs[0];return dec(oddsFor(games[s.gid-1],s.m,s.side))}var i=sgpInfo(gr);return i?i.d:1}
+function slipPricing(){var gs=groups(),d=1,sg=0;gs.forEach(function(gr){d*=groupDec(gr);if(gr.legs.length>1)sg++});return{d:d,gs:gs,sgps:sg}}
+function typeName(pr){if(mode==="parlay")return slip.length+"-leg parlay";if(mode==="sgp")return "SGP · "+slip.length+" legs";return "SGPx · "+pr.sgps+" SGPs"+(pr.gs.length>pr.sgps?" + "+(pr.gs.length-pr.sgps)+" single"+(pr.gs.length-pr.sgps>1?"s":""):"")}
+function isValid(pr){if(mode==="parlay")return slip.length>=2;if(mode==="sgp")return pr.gs.length===1&&slip.length>=2;return pr.sgps>=2}
+function renderSlip(){
+var el=document.getElementById("slip"),b=document.getElementById("place"),ok=false;
+var names={straight:"Straight",parlay:"Parlay",sgp:"SGP",sgpx:"SGPx"};
+var tips={parlay:"One leg per game, at least two games.",sgp:"Pick one game and combine any of: a spread or moneyline, a total, and player props (Ottawa’s are in the Baker game). Legs are correlated, so the price is adjusted.",sgpx:"Combine same-game parlays from two or more games, each with at least two legs (spread or moneyline, total, player props). Other games can add single legs."};
+var h='<div class="seg">'+["straight","parlay","sgp","sgpx"].map(function(m){return '<button data-mode="'+m+'" class="'+(mode===m?"on":"")+'">'+names[m]+'</button>'}).join("")+'</div>';
+if(!slip.length){h+='<div class="empty">Tap any price to add a bet.</div>'+(tips[mode]?'<div class="hint">'+tips[mode]+'</div>':"")}
+else if(mode==="straight"){var tot=0,win=0;
+h+=slip.map(function(s,i){var g=games[s.gid-1];var o=oddsFor(g,s.m,s.side);var st=s.stake||0;tot+=st;win+=st*(dec(o)-1);
+return '<div class="leg"><div class="row"><span>'+label(g,s.m,s.side)+'</span><button class="x" data-rm="'+i+'">×</button></div><div class="row"><span>'+fa(o)+'</span><span>$ <input type="number" min="0" value="'+st+'" data-st="'+i+'"></span></div></div>'}).join("")+ 
+'<div class="leg"><div class="row"><span>Total stake</span><b>'+money(tot)+'</b></div><div class="row"><span>To win</span><b>'+money(win)+'</b></div></div>';
+ok=tot>0&&tot<=bank}
+else{var pr=slipPricing(),d=pr.d;
+h+=pr.gs.map(function(gr){var g=games[gr.gid-1];
+var s='<div class="leg"><div class="hint" style="margin:0 0 4px">'+g.away+' @ '+g.home+'</div>'+gr.legs.map(function(l){var o=oddsFor(g,l.m,l.side);return '<div class="row"><span>'+label(g,l.m,l.side)+' <span class="rec">'+fa(o)+'</span></span><button class="x" data-rm="'+slip.indexOf(l)+'">×</button></div>'}).join("");
+if(gr.legs.length>1){var inf=sgpInfo(gr);if(inf)s+='<div class="row" style="margin-top:4px"><span><b>Same-game price</b></span><b>'+fa(amer(inf.d))+'</b></div><div class="hint" style="margin:2px 0 0">Uncorrelated legs would pay '+fa(amer(inf.ind))+'.</div>'}
+return s+'</div>'}).join("");
+if(isValid(pr)){h+='<div class="leg"><div class="row"><span><b>'+typeName(pr)+'</b></span><b>'+fa(amer(d))+'</b></div><div class="row"><span>Stake</span><span>$ <input type="number" min="0" value="'+pstake+'" data-ps="1"></span></div><div class="row"><span>To win</span><b>'+money(pstake*(d-1))+'</b></div><div class="row"><span>Total return</span><span>'+money(pstake*d)+'</span></div></div>';ok=pstake>0&&pstake<=bank}
+else h+='<div class="hint">'+tips[mode]+'</div>'}
+el.innerHTML=h;b.disabled=!ok;b.textContent=mode==="straight"?"Place bets":"Place "+names[mode].toLowerCase();
+renderPlaced()}
+function renderPlaced(){
+var risk=placed.reduce(function(a,p){return a+(p.st==="open"?p.s:0)},0);
+document.getElementById("bank").textContent=money(bank);
+document.getElementById("risk").textContent=money(risk);
+var open=placed.filter(function(p){return p.st==="open"}),done=placed.filter(function(p){return p.st!=="open"});
+function item(p){var legs=p.legs?'<div class="hint" style="margin:2px 0">'+p.legs.join("<br>")+'</div>':"";
+var tail=p.st==="open"?'<span>'+money(p.s)+' → '+money(p.s*p.d)+'</span>':(p.st==="won"?'<span class="win">+'+money(p.s*(p.d-1))+'</span>':'<span class="loss">−'+money(p.s)+'</span>');
+var act=p.st==="open"?'<div class="row" style="margin-top:4px"><span></span><span><button class="sm" data-settle="'+p.id+':won">Won</button> <button class="sm" data-settle="'+p.id+':lost">Lost</button></span></div>':"";
+return '<div class="leg"><div>'+p.t+'</div>'+legs+'<div class="row"><span>'+fa(p.o)+'</span>'+tail+'</div>'+act+'</div>'}
+var h="";
+if(open.length)h+='<b style="font-size:13px">Open bets</b>'+open.map(item).join("");
+if(done.length)h+='<div style="margin-top:10px"><b style="font-size:13px">Settled</b></div>'+done.map(item).join("");
+document.getElementById("placed").innerHTML=h}
+document.addEventListener("click",function(e){
+var o=e.target.closest(".odd");
+if(o){toggleLeg(o.dataset.k);render();return}
+var r=e.target.closest("[data-rm]");if(r){slip.splice(+r.dataset.rm,1);render();return}
+var m=e.target.closest("[data-mode]");if(m){mode=m.dataset.mode;normalize();render();return}
+var st=e.target.closest("[data-settle]");if(st){var a=st.dataset.settle.split(":");
+var bet=placed.find(function(p){return p.id===+a[0]});
+if(bet&&bet.st==="open"){bet.st=a[1];if(a[1]==="won")bank+=bet.s*bet.d}
+renderSlip()}});
+document.addEventListener("change",function(e){var t=e.target;
+if(t.dataset.f){var gg=games[+t.dataset.g-1];gg[t.dataset.f]=parseFloat(t.value)||0;if(t.dataset.f==="spread"){gg.p=null;gg.mlA=null}render()}
+else if(t.dataset.st!==undefined){slip[+t.dataset.st].stake=Math.max(0,parseFloat(t.value)||0);renderSlip()}
+else if(t.dataset.ps){pstake=Math.max(0,parseFloat(t.value)||0);renderSlip()}});
+document.getElementById("place").addEventListener("click",function(){
+if(mode!=="straight"){
+var pr=slipPricing();
+if(!isValid(pr)||pstake<=0||pstake>bank)return;
+var lines=pr.gs.map(function(gr){var g=games[gr.gid-1];return gr.legs.map(function(l){return label(g,l.m,l.side)}).join(" + ")+" ("+g.away+" @ "+g.home+")"});
+placed.push({id:nid++,t:typeName(pr),legs:lines,o:amer(pr.d),s:pstake,d:pr.d,st:"open"});
+bank-=pstake}
+else{slip.forEach(function(s){var g=games[s.gid-1];var o=oddsFor(g,s.m,s.side);
+if(s.stake>0&&s.stake<=bank){bank-=s.stake;placed.push({id:nid++,t:label(g,s.m,s.side)+" ("+g.away+" @ "+g.home+")",legs:null,o:o,s:s.stake,d:dec(o),st:"open"})}})}
+slip=[];render()});
+document.addEventListener("toggle",function(e){if(e.target.classList&&e.target.classList.contains("props"))openProps[e.target.dataset.gid]=e.target.open},true);
+render();
+</script>
+</body></html>
